@@ -70,6 +70,7 @@ public class UserRequestService {
         userRequest.setStatus(RequestStatus.ACCEPTED);
         userRequest.setUpdatedAt(LocalDateTime.now());
         userRequestRepository.save(userRequest);
+        //TODO: Add service logic here.
         log.info("User with id: {} accepted request with id: {}", currentUser.getId(), userRequestId);
         return ResponseEntity.ok(new ResponseWrapper(SuccessMessageConstants.REQUEST_ACCEPTED));
     }
