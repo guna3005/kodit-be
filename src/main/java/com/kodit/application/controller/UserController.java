@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/find")
-    public ResponseEntity<List<UserDto>> findUsers(@RequestParam String searchText){
-        return userService.findUsers(searchText);
+    public ResponseEntity<List<UserDto>> findUsers(@RequestParam String searchText, Principal principal){
+        return userService.findUsers(searchText,principal.getName());
     }
 }
