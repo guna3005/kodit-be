@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/kodit
+    username: admin
+    password: Admin@123
+
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: create
+      show-sql: true
+      format-sql: true
+      type: info
+      use-sql-comments: true
+      properties:
+        hibernate.use_sql_comments: true
+        hibernate.format_sql: true
+
+springdoc:
+  show-actuator: true
+  paths-to-match: /**
+  packages-to-scan: com.kodit.application
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+
+
+jwt:
+  secretKey: secret
+  issuer: www.kodit.com
+  expirationMinute: 10
