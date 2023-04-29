@@ -45,4 +45,9 @@ public class UserService {
         log.info("Searching for user with username: {}", username);
         return userRepository.findByUsername(username);
     }
+
+    public void saveUser(User currentUser) {
+        log.info("Saving user with username: {}", currentUser.getUsername());
+        userRepository.save(currentUser);
+    }
 }
