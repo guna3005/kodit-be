@@ -3,7 +3,8 @@ package com.kodit.application.model;
 import lombok.*;
 
 import javax.persistence.*;
-
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -30,4 +31,14 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserRole userRole;
 
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "USER_FRIENDS",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "friend_id"))
+	private Set<User> friendList = new HashSet<>();
+
+	public void addFriend(User user) {
+		this.friendList.add(user);
+		user.getFriendList().add(this);
+	}
 }
