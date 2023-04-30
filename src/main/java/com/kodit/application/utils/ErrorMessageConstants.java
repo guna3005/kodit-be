@@ -10,4 +10,6 @@ public class ErrorMessageConstants {
     public static final String REQUEST_NOT_PENDING = "Request is already been progressed from pending state";
     public static final String ALREADY_REQUESTED_TO_YOU = "the requested user has already requested you. please accept that request.";
     public static final String ALREADY_FRIENDS = "You are already friends with this user";
+    public static final String POST_DOES_NOT_EXIST = "Requested Post does not exists";
+
 }

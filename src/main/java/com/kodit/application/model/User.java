@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 
 @Getter
 @Setter
@@ -30,6 +32,10 @@ public class User {
 
 	@Enumerated(EnumType.STRING)
 	private UserRole userRole;
+	@OneToMany
+	private List<Post> posts;
+	@OneToMany
+	private Set<Tag> tags;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "USER_FRIENDS",
