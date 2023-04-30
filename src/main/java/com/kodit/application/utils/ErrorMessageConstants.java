@@ -11,5 +11,6 @@ public class ErrorMessageConstants {
     public static final String ALREADY_REQUESTED_TO_YOU = "the requested user has already requested you. please accept that request.";
     public static final String ALREADY_FRIENDS = "You are already friends with this user";
     public static final String POST_DOES_NOT_EXIST = "Requested Post does not exists";
+    public static final String TAG_DOES_NOT_EXIST = "Requested Tag does not exists";
 
 }

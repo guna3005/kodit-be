@@ -9,6 +9,9 @@ public class SuccessMessageConstants {
     public static final String POST_CREATE_SUCCESS = "Post created successfully";
     public static final String POST_DELETE_SUCCESS = "Post delete successfully";
     public static final String POST_LIKE_SUCCESS = "Liked the post successfully";
+    public static final String COMMENT_POST_SUCCESS = "Commented on the post successfully";
+    public static final String TAG_FOLLOW_SUCCESS = "Tag followed successfully";
+    public static final String TAG_UNFOLLOW_SUCCESS = "Tag unfollowed successfully";
 
 
 }

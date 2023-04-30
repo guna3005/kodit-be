@@ -16,13 +16,14 @@ import java.security.Principal;
 @AllArgsConstructor
 public class LikeController {
     private LikeService likeService;
+
     @PostMapping("")
-    public ResponseEntity<ResponseWrapper> likePost(Long postId, Principal principal){
+    public ResponseEntity<ResponseWrapper> likePost(Long postId, Principal principal) {
         return likeService.likePost(postId, principal.getName());
     }
 
     @DeleteMapping("")
-    public ResponseEntity<ResponseWrapper> unLikePost(Long postId, Principal principal){
+    public ResponseEntity<ResponseWrapper> unLikePost(Long postId, Principal principal) {
         return likeService.unLikePost(postId, principal.getName());
     }
 }

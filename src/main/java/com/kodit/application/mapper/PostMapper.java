@@ -16,6 +16,7 @@ public interface PostMapper {
     PostMapper INSTANCE = Mappers.getMapper(PostMapper.class);
 
     PostDto convertToPost(Post post);
+
     @Mapping(source = "postedBy.username", target = "postedBy")
     @Mapping(target = "likes", expression = "java(getLikesCount(post.getLikes()))")
     PostDto convertToPostDto(Post post);
@@ -23,6 +24,7 @@ public interface PostMapper {
     default String map(User user) {
         return user.getUsername();
     }
+
     default Long getLikesCount(List<Like> likes) {
         return (long) likes.size();
     }

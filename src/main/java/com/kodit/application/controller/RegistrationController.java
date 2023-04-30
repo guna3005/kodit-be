@@ -17,14 +17,14 @@ import javax.validation.Valid;
 @RequestMapping("/auth/register")
 public class RegistrationController {
 
-	private final UserService userService;
+    private final UserService userService;
 
-	@PostMapping
-	public ResponseEntity<ResponseWrapper> registrationRequest(@Valid @RequestBody RegistrationRequest registrationRequest) {
+    @PostMapping
+    public ResponseEntity<ResponseWrapper> registrationRequest(@Valid @RequestBody RegistrationRequest registrationRequest) {
 
-		final ResponseWrapper registrationResponse = userService.registration(registrationRequest);
+        final ResponseWrapper registrationResponse = userService.registration(registrationRequest);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(registrationResponse);
-	}
+        return ResponseEntity.status(HttpStatus.CREATED).body(registrationResponse);
+    }
 
 }

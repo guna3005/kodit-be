@@ -17,24 +17,30 @@ import java.util.List;
 @AllArgsConstructor
 public class PostController {
     private PostService postService;
+
     @GetMapping("/feed")
-    public ResponseEntity<List<Post>> getFeed(Principal principal){
+    public ResponseEntity<List<Post>> getFeed(Principal principal) {
         return postService.getAllPostsForaUser(principal.getName());
     }
 
     @PostMapping("")
-    public ResponseEntity<ResponseWrapper> uploadPost(@RequestBody PostUploadRequestDto postUploadRequestDto, Principal principal){
-        return postService.uploadPost(postUploadRequestDto,principal.getName());
+    public ResponseEntity<ResponseWrapper> uploadPost(@RequestBody PostUploadRequestDto postUploadRequestDto, Principal principal) {
+        return postService.uploadPost(postUploadRequestDto, principal.getName());
     }
 
     @GetMapping("")
-    public ResponseEntity<List<PostDto>> getAllPosts(Principal principal){
+    public ResponseEntity<List<PostDto>> getAllPosts(Principal principal) {
         return postService.getAllPostsOfaUsers(principal.getName());
     }
 
     @DeleteMapping("")
-    public ResponseEntity<ResponseWrapper> deletePost(@RequestBody Long postId , Principal principal){
-        return postService.deletePost(postId,principal.getName());
+    public ResponseEntity<ResponseWrapper> deletePost(@RequestBody Long postId, Principal principal) {
+        return postService.deletePost(postId, principal.getName());
+    }
+
+    @GetMapping("/tags")
+    public ResponseEntity<List<Post>> getAllPostsofTag(@RequestBody Long tagId,Principal principal){
+        return postService.getAllPostsOfTag(tagId);
     }
 
 }

@@ -24,7 +24,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
 
-    public ResponseEntity<List<UserDto>> findUsers(String searchText,String username) {
+    public ResponseEntity<List<UserDto>> findUsers(String searchText, String username) {
         log.info("Searching for users with search text: {}", searchText);
         User user = findUserByUsername(username);
         //todo later add the role based check

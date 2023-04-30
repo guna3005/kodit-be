@@ -15,17 +15,17 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class RegistrationRequest {
 
-	@NotEmpty(message = "name cannot be empty")
-	private String name;
+    @NotEmpty(message = "name cannot be empty")
+    private String name;
 
-	@Email(message = "Please enter a valid email address")
-	@NotEmpty(message = "email cannot be empty")
-	private String email;
+    @Email(message = "Please enter a valid email address")
+    @NotEmpty(message = "email cannot be empty")
+    private String email;
 
-	@NotEmpty(message = "username cannot be empty")
-	private String username;
+    @NotEmpty(message = "username cannot be empty")
+    private String username;
 
-	@NotEmpty(message = "password cannot be empty")
-	private String password;
+    @NotEmpty(message = "password cannot be empty")
+    private String password;
 
 }

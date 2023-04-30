@@ -1,6 +1,5 @@
 package com.kodit.application.BootStrap;
 
-import com.kodit.application.configuration.PasswordEncoderConfiguration;
 import com.kodit.application.model.User;
 import com.kodit.application.model.UserRole;
 import com.kodit.application.repository.UserRepository;

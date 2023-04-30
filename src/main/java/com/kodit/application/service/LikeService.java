@@ -19,7 +19,7 @@ public class LikeService {
     private final LikeRepository likeRepository;
     private final PostService postService;
 
-    public ResponseEntity<ResponseWrapper> likePost(Long postId,String username){
+    public ResponseEntity<ResponseWrapper> likePost(Long postId, String username) {
         final User user = userService.findUserByUsername(username);
         final Post post = postService.findPostByPostId(postId);
         Like newLike = Like.builder().post(post).user(user).build();
@@ -27,7 +27,7 @@ public class LikeService {
         return ResponseEntity.ok(new ResponseWrapper(SuccessMessageConstants.POST_LIKE_SUCCESS));
     }
 
-    public ResponseEntity<ResponseWrapper> unLikePost(Long postId,String username){
+    public ResponseEntity<ResponseWrapper> unLikePost(Long postId, String username) {
         final User user = userService.findUserByUsername(username);
         likeRepository.deleteByUserAndPost(user.getId(), postId);
         return ResponseEntity.ok(new ResponseWrapper(SuccessMessageConstants.POST_LIKE_SUCCESS));

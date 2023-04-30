@@ -6,6 +6,7 @@ import com.kodit.application.exceptions.ApiExceptionResponse;
 import com.kodit.application.exceptions.CustomException;
 import com.kodit.application.mapper.PostMapper;
 import com.kodit.application.model.Post;
+import com.kodit.application.model.Tag;
 import com.kodit.application.model.User;
 import com.kodit.application.repository.PostRepository;
 import com.kodit.application.security.dto.ResponseWrapper;
@@ -45,22 +46,26 @@ public class PostService {
         return ResponseEntity.ok(new ResponseWrapper(SuccessMessageConstants.POST_DELETE_SUCCESS));
     }
 
-    public ResponseEntity<List<PostDto>> getAllPostsOfaUsers(String username){
+    public ResponseEntity<List<PostDto>> getAllPostsOfaUsers(String username) {
         final User user = userService.findUserByUsername(username);
         List<Post> posts = postRepository.findAllByPostedBy_Id(user.getId());
-        List<PostDto> postDtos  = postMapper.mapPostsToPostDtos(posts);
+        List<PostDto> postDtos = postMapper.mapPostsToPostDtos(posts);
         return ResponseEntity.ok(postDtos);
     }
 
-    public ResponseEntity<List<Post>> getAllPostsForaUser(String username){
+    public ResponseEntity<List<Post>> getAllPostsForaUser(String username) {
         final User user = userService.findUserByUsername(username);
         return ResponseEntity.ok(postRepository.findPostsByFriendsButNotByUser(user.getId()));
     }
 
-    protected Post findPostByPostId(Long postId){
-        return postRepository.findById(postId).orElseThrow(()-> new CustomException(
-                new ApiExceptionResponse(ErrorMessageConstants.POST_DOES_NOT_EXIST,HttpStatus.BAD_REQUEST,LocalDateTime.now())
+    protected Post findPostByPostId(Long postId) {
+        return postRepository.findById(postId).orElseThrow(() -> new CustomException(
+                new ApiExceptionResponse(ErrorMessageConstants.POST_DOES_NOT_EXIST, HttpStatus.BAD_REQUEST, LocalDateTime.now())
         ));
+    }
+
+    public ResponseEntity<List<Post>> getAllPostsOfTag(Long tagId){
+        return ResponseEntity.ok(postRepository.findPostsByTagId(tagId));
     }
 
 }
