@@ -12,5 +12,6 @@ public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     UserDto convertToUserDto(User user);
+
     List<UserDto> convertToUserDtoList(List<User> users);
 }

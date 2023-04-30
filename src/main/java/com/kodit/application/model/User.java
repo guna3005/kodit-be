@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 
 @Getter
 @Setter
@@ -15,30 +17,34 @@ import java.util.Set;
 @Table(name = "USERS")
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private String name;
+    private String name;
 
-	@Column(unique = true)
-	private String username;
+    @Column(unique = true)
+    private String username;
 
-	private String password;
+    private String password;
 
-	private String email;
+    private String email;
 
-	@Enumerated(EnumType.STRING)
-	private UserRole userRole;
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
+    @OneToMany
+    private List<Post> posts;
+    @OneToMany
+    private Set<Tag> tags;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "USER_FRIENDS",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "friend_id"))
-	private Set<User> friendList = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "USER_FRIENDS",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "friend_id"))
+    private Set<User> friendList = new HashSet<>();
 
-	public void addFriend(User user) {
-		this.friendList.add(user);
-		user.getFriendList().add(this);
-	}
+    public void addFriend(User user) {
+        this.friendList.add(user);
+        user.getFriendList().add(this);
+    }
 }
