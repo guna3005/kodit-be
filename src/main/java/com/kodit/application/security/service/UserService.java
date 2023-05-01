@@ -8,10 +8,10 @@ import com.kodit.application.security.dto.ResponseWrapper;
 
 public interface UserService {
 
-	User findByUsername(String username);
+    User findByUsername(String username);
 
-	ResponseWrapper registration(RegistrationRequest registrationRequest);
+    ResponseWrapper registration(RegistrationRequest registrationRequest);
 
-	AuthenticatedUserDto findAuthenticatedUserByUsername(String username);
+    AuthenticatedUserDto findAuthenticatedUserByUsername(String username);
 
 }

@@ -12,6 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ResponseWrapper {
 
-	private String message;
+    private String message;
 
 }
