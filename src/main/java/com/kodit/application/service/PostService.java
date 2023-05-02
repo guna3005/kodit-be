@@ -9,6 +9,7 @@ import com.kodit.application.model.Post;
 import com.kodit.application.model.Tag;
 import com.kodit.application.model.User;
 import com.kodit.application.repository.PostRepository;
+import com.kodit.application.repository.TagRepository;
 import com.kodit.application.security.dto.ResponseWrapper;
 import com.kodit.application.utils.ErrorMessageConstants;
 import com.kodit.application.utils.SuccessMessageConstants;
@@ -19,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,11 +30,22 @@ public class PostService {
     private final UserService userService;
     private final PostRepository postRepository;
     private final PostMapper postMapper;
+    private final TagRepository tagRepository;
 
     public ResponseEntity<ResponseWrapper> uploadPost(PostUploadRequestDto postUploadRequestDto, String username) {
         final User user = userService.findUserByUsername(username);
-        Post newPost = Post.builder().postedBy(user).content(postUploadRequestDto.getContent()).postedTime(LocalDateTime.now()).build();
+        ArrayList<Tag> postTags = new ArrayList<>();
+        postUploadRequestDto.getTags().stream().forEach(tagDto ->{
+            tagRepository.findById(tagDto.getId()).ifPresentOrElse(tag->{
+                postTags.add(tag);
+            },()->{
+                Tag savedTag = tagRepository.save(tagDto);
+                postTags.add(savedTag);
+            });
+        });
+        Post newPost = Post.builder().postedBy(user).content(postUploadRequestDto.getContent()).postedTime(LocalDateTime.now()).tags(new ArrayList<>()).build();
         Post savedPost = postRepository.save(newPost);
+        savedPost.getTags().addAll(postTags);
         user.getPosts().add(savedPost);
         return ResponseEntity.ok(new ResponseWrapper(SuccessMessageConstants.POST_CREATE_SUCCESS));
     }
@@ -49,6 +62,7 @@ public class PostService {
     public ResponseEntity<List<PostDto>> getAllPostsOfaUsers(String username) {
         final User user = userService.findUserByUsername(username);
         List<Post> posts = postRepository.findAllByPostedBy_Id(user.getId());
+        posts.stream().forEach(post -> System.out.println(post.toString()));
         List<PostDto> postDtos = postMapper.mapPostsToPostDtos(posts);
         return ResponseEntity.ok(postDtos);
     }

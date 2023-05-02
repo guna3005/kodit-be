@@ -12,6 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +20,14 @@ public class Post {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private User postedBy;
     private LocalDateTime postedTime;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> comments;
     @OneToMany
+    @JoinTable(
+            name = "post_likes",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "like_id")
+    )
     private List<Like> likes;
     @OneToMany
     private List<Tag> tags;

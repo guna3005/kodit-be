@@ -36,7 +36,6 @@ public class User {
     private List<Post> posts;
     @OneToMany
     private Set<Tag> tags;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "USER_FRIENDS",
             joinColumns = @JoinColumn(name = "user_id"),

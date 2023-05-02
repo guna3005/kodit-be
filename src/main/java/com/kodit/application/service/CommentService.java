@@ -9,6 +9,7 @@ import com.kodit.application.security.dto.ResponseWrapper;
 import com.kodit.application.utils.SuccessMessageConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +25,9 @@ public class CommentService {
     private final PostService postService;
 
     @Transactional
-    public ResponseEntity<ResponseWrapper> commentOnPost(CommentDto commentDto, String username) {
-        final User user = userService.findUserByUsername(username);
-        final Post post = postService.findPostByPostId(commentDto.getPostId());
+    public ResponseEntity<ResponseWrapper> commentOnPost(CommentDto commentDto,Long postId ,String username) {
+        final User user = userService.findUserByUsername(commentDto.getCommentedBy());
+        final Post post = postService.findPostByPostId(postId);
         Comment newComment = Comment.builder().commentedOn(LocalDateTime.now()).text(commentDto.getText()).user(user).post(post).build();
         commentRepository.save(newComment);
         post.getComments().add(newComment);

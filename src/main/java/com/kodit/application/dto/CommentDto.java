@@ -11,8 +11,6 @@ import java.time.LocalDateTime;
 @Builder
 public class CommentDto {
     private Long id;
-    private Long postId;
-    private Long userId;
     private String commentedBy;
     private String text;
     private LocalDateTime commentedOn;

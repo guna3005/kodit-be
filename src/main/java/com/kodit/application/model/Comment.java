@@ -15,10 +15,10 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
     private LocalDateTime commentedOn;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Post post;
     private String text;
 }

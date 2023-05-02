@@ -2,7 +2,6 @@ package com.kodit.application.service;
 
 import com.kodit.application.exceptions.ApiExceptionResponse;
 import com.kodit.application.exceptions.CustomException;
-import com.kodit.application.model.Post;
 import com.kodit.application.model.Tag;
 import com.kodit.application.model.User;
 import com.kodit.application.repository.TagRepository;
@@ -49,15 +48,14 @@ public class TagService {
         return ResponseEntity.ok(new ResponseWrapper(SuccessMessageConstants.TAG_UNFOLLOW_SUCCESS));
     }
 
-    public ResponseEntity<List<Post>> getAllPostsOfTag
 
     @Transactional
-    public ResponseEntity<Boolean> isFollowingTag(Tag requestTag,String username){
+    public ResponseEntity<Boolean> isFollowingTag(Tag requestTag, String username) {
         final User user = userService.findUserByUsername(username);
         return ResponseEntity.ok(user.getTags().contains(requestTag));
     }
 
-    public ResponseEntity<List<Tag>> searchTags(String searchText){
+    public ResponseEntity<List<Tag>> searchTags(String searchText) {
         return ResponseEntity.ok(tagRepository.findAllByNameContainsIgnoreCase(searchText));
     }
 
